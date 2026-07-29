@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0d1117; color: #f3f4f6; min-height: 100vh; display: flex; flex-direction: column; }
+        body { background-color: #0d1117; color: #f3f4f6; min-height: 100vh; display: flex; flex-direction: column; width: 100%; overflow-x: hidden; }
         
         .hidden { display: none !important; }
         .flex { display: flex; }
@@ -18,7 +18,7 @@
         .gap-2 { gap: 8px; }
         .gap-4 { gap: 16px; }
 
-        #auth-screen { position: fixed; inset: 0; background: #0d1117; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 16px; overflow-y: auto; }
+        #auth-screen { position: fixed; inset: 0; background: #0d1117; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 16px; overflow-y: auto; width: 100vw; height: 100vh; }
         .auth-card { background: #161b22; border: 1px solid #30363d; padding: 24px; border-radius: 16px; width: 100%; max-width: 400px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); margin: auto; }
         
         .input-group { margin-bottom: 16px; }
@@ -30,17 +30,19 @@
         .btn-primary:hover { background: #0096b4; }
         .btn-google { width: 100%; background: #ffffff; color: #111827; border: none; padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; }
         
-        header { background: #161b22; border-bottom: 1px solid #30363d; padding: 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 40; }
-        main { flex: 1; padding: 16px; max-width: 500px; width: 100%; margin: 0 auto; padding-bottom: 40px; }
+        header { background: #161b22; border-bottom: 1px solid #30363d; padding: 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 40; width: 100%; }
         
-        .module-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        /* Tam ekran akışkan yapı (Genişletildi ve esnetildi) */
+        main { flex: 1; padding: 16px; width: 100%; max-width: 1200px; margin: 0 auto; padding-bottom: 40px; }
+        
+        .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; width: 100%; }
         .module-card { background: #161b22; border: 1px solid #30363d; padding: 20px 12px; border-radius: 12px; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
         .module-card:hover { border-color: #00b4d8; transform: translateY(-2px); }
         .module-card i { font-size: 28px; margin-bottom: 8px; }
         .module-card h3 { font-size: 14px; font-weight: 600; color: #f3f4f6; }
         .module-card p { font-size: 11px; color: #8b949e; margin-top: 4px; }
 
-        .module-view-box { background: #161b22; border: 1px solid #30363d; padding: 20px; border-radius: 16px; text-align: center; }
+        .module-view-box { background: #161b22; border: 1px solid #30363d; padding: 20px; border-radius: 16px; text-align: center; width: 100%; }
         .back-btn { background: none; border: none; color: #58a6ff; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 6px; margin-bottom: 16px; font-weight: 600; }
         
         /* Çark Tasarımı */
@@ -174,7 +176,7 @@
 
         <main>
             <!-- Güvenlik ve Hile Uyarı Butonu (Açılır Modal Tetikleyici) -->
-            <div style="margin-bottom: 16px;">
+            <div style="margin-bottom: 16px; width: 100%;">
                 <button onclick="openSecurityModal()" style="width: 100%; background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-radius: 12px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; color: #f87171; font-weight: bold; font-size: 13px;">
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <i class="fas fa-shield-alt" style="font-size: 18px;"></i>
@@ -194,7 +196,7 @@
                         <button onclick="closeSecurityModal()" style="background: none; border: none; color: #8b949e; font-size: 18px; cursor: pointer;"><i class="fas fa-times"></i></button>
                     </div>
                     <p style="font-size: 12px; color: #d1d5db; line-height: 1.5; margin-bottom: 20px;">
-                        Çift hesap açmak, farklı cihazlardan aynı hesaba girmek, makro/otomasyon kullanmak, hile girişimlerinde bulunmak veya yetkisiz puan yükseltmek kesinlikle yasaktır. Sistem güvenlik algoritmalarımız bu ihlalleri anında tespit eder; tespit edilen hesaplar ve ilişkili tüm varlıklar <b>kalıcı olarak banlanır</b>, biriken ödüller ve bakiyeler silinir.
+                        Çift hesap açmak, farklı cihazlardan aynı hesaba girmek, makro/otomasyon kullanmak, hile girişimlerinde bulunmak veya yetkisiz puan yükseltmek kesinlikle yasaktır. Sistem güvenlik algoritmalarımız bu ihlalleri anında tespit eder; tespit edilen hesaplar ve ilişkili tüm varlıklar <b>kalıcı olarak banlanır</b>, biriken ödüller ve bakiyeler silinir[span_5](start_span)[span_5](end_span).
                     </p>
                     <button onclick="closeSecurityModal()" class="btn-primary" style="background: #30363d; padding: 10px; font-size: 14px;">Anladım</button>
                 </div>
@@ -292,7 +294,7 @@
                     <h3>Referans</h3>
                     <p>Arkadaşını Davet Et</p>
                 </div>
-                <div onclick="openModule('paidlist')" class="module-card" style="grid-column: span 2;">
+                <div onclick="openModule('paidlist')" class="module-card" style="grid-column: 1 / -1;">
                     <i class="fas fa-receipt" style="color: #f43f5e;"></i>
                     <h3>Ödeme Alanlar</h3>
                     <p>Son Ödemeler</p>
@@ -650,7 +652,7 @@
                 <!-- Ödeme Alanlar -->
                 <div id="mod-paidlist" class="module-view hidden module-view-box" style="text-align: left;">
                     <h2 style="font-size: 18px; margin-bottom: 16px; text-align: center;">🧾 Son Ödeme Alanlar</h2>
-                    <div id="payouts-list">Yükleniyor...*/</div>
+                    <div id="payouts-list">Yükleniyor...</div>
                 </div>
             </div>
         </main>
@@ -701,7 +703,6 @@
 
         let dailyQuizList = [];
 
-        // Tarayıcı/Cihaz Parmak İzi (Device Fingerprint) ve Çoklu Cihaz / Çift Hesap Engelleme Altyapısı
         function getOrCreateDeviceId() {
             let devId = localStorage.getItem('app_secure_device_id');
             if(!devId) {
@@ -824,7 +825,6 @@
                 }
             } catch (error) {
                 authError.innerText = error.message;
-                authError.classList.add('hidden'); // Fix toggle visibility
                 authError.classList.remove('hidden');
             }
         });
@@ -963,7 +963,7 @@
             let multiplier = userData.vip ? 2 : 1;
             let finalAmount = amount * multiplier;
             userData.points = (userData.points || 0) + finalAmount;
-            userData.xp = (userData.xp || 0) + amount; // XP birikimi
+            userData.xp = (userData.xp || 0) + amount;
             await update(ref(db, 'users/' + currentUser.uid), { points: userData.points, xp: userData.xp });
             updateUI();
         }
@@ -994,7 +994,7 @@
             let maxQuiz = userData.vip ? 20 : 10;
             let maxAds = userData.vip ? 60 : 30;
             let maxMystery = userData.vip ? 20 : 10;
-            let maxDuel = 5; // Günlük 5 Düello Hakkı
+            let maxDuel = 5;
 
             document.getElementById('wheel-left').innerText = `${maxWheel - (limits.wheel || 0)} / ${maxWheel}`;
             document.getElementById('click-left').innerText = maxClick - (limits.click || 0);
@@ -1012,8 +1012,7 @@
                 boxBtn.style.background = "#374151";
                 boxBtn.style.color = "#8b949e";
             } else {
-                boxBtn.innerText = "Süre Dolumu Bekleniyor" === boxBtn.innerText ? "Şans Kutusunu Aç (25 Puan)" : boxBtn.innerText;
-                // Keep default button styling handled seamlessly
+                boxBtn.innerText = "Şans Kutusunu Aç (25 Puan)";
                 boxBtn.disabled = false;
                 boxBtn.style.background = "#a855f7";
                 boxBtn.style.color = "#fff";
@@ -1022,7 +1021,7 @@
             const claimBtn = document.getElementById('claim-daily-btn');
             const dailyStatus = document.getElementById('daily-status-text');
             if(userData.lastDailyClaim === "CLAIMED") {
-                dailyStatus.innerText = "Bugünkü ödülünüz aldınız. Sonraki sıfırlamada tekrar alabilirsiniz!";
+                dailyStatus.innerText = "Bugünkü ödülünüzü aldınız. Sonraki sıfırlamada tekrar alabilirsiniz!";
                 claimBtn.innerText = "Alındı";
                 claimBtn.disabled = true;
                 claimBtn.style.background = "#374151";
@@ -1061,7 +1060,6 @@
             }
         }
 
-        // Güvenlik ve Gizlilik Modalı Fonksiyonları
         window.openSecurityModal = function() {
             document.getElementById('security-modal').classList.remove('hidden');
         }
@@ -1093,7 +1091,6 @@
             document.getElementById('module-menu').classList.remove('hidden');
         }
 
-        // 2. BAŞARIMLAR MANTIĞI (Daha Çetin / Zorlaştırılmış Eşikler)
         function renderAchievements() {
             const container = document.getElementById('achievements-list-container');
             container.innerHTML = "";
@@ -1137,7 +1134,6 @@
             alert(`Tebrikler! Başarım açıldı ve ${reward} Puan kazandınız.`);
         }
 
-        // 3. ARKADAŞ DÜELLOSU MANTIĞI (Günlük 5 Hak ve Gerçekçi Simülasyonlu 3 Soruluk Yapı)
         let duelQuestionsPool = [
             { q: "Türkiye'nin başkenti neresidir?", options: ["Ankara", "İstanbul", "İzmir", "Bursa"], answer: 0 },
             { q: "2 + 2 * 2 işleminin sonucu kaçtır?", options: ["8", "6", "4", "2"], answer: 1 },
@@ -1168,7 +1164,6 @@
             await update(ref(db, 'users/' + currentUser.uid + '/limits'), limits);
             updateUI();
 
-            // Rastgele 3 soru seç
             let shuffled = [...duelQuestionsPool].sort(() => 0.5 - Math.random());
             currentDuel = { round: 1, myScore: 0, rivalScore: 0, questions: shuffled.slice(0, 3) };
 
@@ -1202,12 +1197,10 @@
         }
 
         function handleDuelAnswer(selectedIndex, correctIndex) {
-            // Kullanıcı cevabı
             if(selectedIndex === correctIndex) {
                 currentDuel.myScore++;
             }
 
-            // Rakip simülasyonu (%65 ihtimalle doğru bilir)
             let rivalCorrect = Math.random() < 0.65;
             if(rivalCorrect) {
                 currentDuel.rivalScore++;
@@ -1233,7 +1226,6 @@
             updateUI();
         }
 
-        // 4. NAKİT İLE VIP ÖDEME BİLDİRİMİ
         window.requestVipPayment = async function() {
             const bankName = document.getElementById('vip-bank-name').value.trim();
             const senderInfo = document.getElementById('vip-sender-info').value.trim();
@@ -1258,7 +1250,6 @@
             closeModule();
         }
 
-        // 5. DİJİTAL CÜZDAN E-PİN SATIN ALMA
         window.buyPin = async function(pinName, costPoints) {
             if((userData.points || 0) < costPoints) {
                 alert('Bu e-pin kodu için puanınız yetersiz!');
@@ -1646,7 +1637,6 @@
             document.getElementById('anladim-check').checked = false;
         }
 
-        // İsim soyismi gizleyerek şifreli hale getiren yardımcı fonksiyon (Örn: Kubilay Erdemir -> K*** E***)
         function maskFullName(fullName) {
             if(!fullName) return "Kullanıcı";
             return fullName.split(' ').map(part => {
@@ -1669,7 +1659,6 @@
                     let maskedName = maskFullName(u.fullName || u.email);
                     let vipTag = u.vip ? " 👑" : "";
                     
-                    // Giriş yapmış kullanıcının kendi sırasını yeşil yapma kontrolü
                     let isCurrent = currentUser && u.id === currentUser.uid;
                     let itemStyle = isCurrent ? "background: rgba(16, 185, 129, 0.15); border-color: #10b981;" : "";
                     let textStyle = isCurrent ? "color: #34d399; font-weight: bold;" : "";
