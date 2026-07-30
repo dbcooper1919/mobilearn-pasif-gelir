@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ödül ve Kazan Platformu</title>
+    <title>MobiLearn Ödül Platformu</title>
+    <!-- PWA Manifest Bağlantısı -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0d1117">
+    <link rel="apple-touch-icon" href="icon-512.png">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -32,7 +37,6 @@
         
         header { background: #161b22; border-bottom: 1px solid #30363d; padding: 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 40; width: 100%; }
         
-        /* Tam ekran akışkan yapı (Genişletildi ve esnetildi) */
         main { flex: 1; padding: 16px; width: 100%; max-width: 1200px; margin: 0 auto; padding-bottom: 40px; }
         
         .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; width: 100%; }
@@ -45,7 +49,6 @@
         .module-view-box { background: #161b22; border: 1px solid #30363d; padding: 20px; border-radius: 16px; text-align: center; width: 100%; }
         .back-btn { background: none; border: none; color: #58a6ff; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 6px; margin-bottom: 16px; font-weight: 600; }
         
-        /* Çark Tasarımı */
         .wheel-container { position: relative; width: 280px; height: 280px; margin: 10px auto 20px; }
         .wheel { 
             width: 100%; height: 100%; border-radius: 50%; border: 6px solid #00b4d8; position: relative; overflow: hidden; 
@@ -83,7 +86,6 @@
         .list-item { background: #21262d; border: 1px solid #30363d; padding: 10px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 14px; }
         .task-card { background: #21262d; border: 1px solid #30363d; padding: 14px; border-radius: 10px; margin-bottom: 12px; text-align: left; }
         
-        /* Hediye Dükkanı Tasarımı */
         .gift-item { background: #21262d; border: 1px solid #30363d; border-radius: 10px; padding: 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
         .gift-left { display: flex; align-items: center; gap: 12px; }
         .gift-img { width: 50px; height: 50px; background: #161b22; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: #00b4d8; border: 1px solid #30363d; overflow: hidden; }
@@ -101,7 +103,6 @@
             <div id="auth-error" class="hidden" style="background: rgba(239,68,68,0.1); border: 1px solid #ef4444; color: #f87171; padding: 10px; border-radius: 6px; margin-bottom: 14px; font-size: 13px;"></div>
             
             <form id="auth-form">
-                <!-- Kayıt Olurken Görünecek İsim Soyisim Alanı -->
                 <div class="input-group hidden" id="auth-name-group">
                     <label>Ad Soyad</label>
                     <input type="text" id="auth-fullname" placeholder="Adınız ve Soyadınız">
@@ -114,7 +115,6 @@
                     <label>Şifre</label>
                     <input type="password" id="auth-password" required>
                 </div>
-                <!-- Kayıt Olurken Görünecek Referans Alanı -->
                 <div class="input-group hidden" id="auth-ref-group">
                     <label>Referans Kodu (İsteğe Bağlı)</label>
                     <input type="text" id="auth-ref-input" placeholder="Varsa arkadaşınızın kodu">
@@ -131,7 +131,6 @@
                 <button id="auth-toggle-btn" style="background: none; border: none; color: #58a6ff; font-weight: 600; cursor: pointer; margin-left: 4px;">Kayıt Ol</button>
             </div>
 
-            <!-- Google Play / Arayüz Uyumlu Gizlilik Sözleşmesi Bağlantısı -->
             <div style="margin-top: 15px; text-align: center;">
                 <button type="button" onclick="openPrivacyModal()" style="background: none; border: none; color: #8b949e; font-size: 11px; cursor: pointer; text-decoration: underline;">Gizlilik Sözleşmesi ve Şartlar</button>
             </div>
@@ -148,7 +147,7 @@
                 <button onclick="closePrivacyModal()" style="background: none; border: none; color: #8b949e; font-size: 18px; cursor: pointer;"><i class="fas fa-times"></i></button>
             </div>
             <div style="font-size: 12px; color: #d1d5db; line-height: 1.6; display: flex; flex-direction: column; gap: 10px;">
-                <p><b>1. Veri Toplama ve Kullanım:</b> Ödül ve Kazan Platformu, hesap yönetimi, puan takibi, güvenlik doğrulaması ve ödül gönderimi amacıyla e-posta adresinizi, cihaz parmak izinizi ve uygulama içi işlem geçmişinizi güvenli Firebase veritabanında saklar[span_0](start_span)[span_0](end_span).</p>
+                <p><b>1. Veri Toplama ve Kullanım:</b> MobiLearn Ödül Platformu, hesap yönetimi, puan takibi, güvenlik doğrulaması ve ödül gönderimi amacıyla e-posta adresinizi, cihaz parmak izinizi ve uygulama içi işlem geçmişinizi güvenli Firebase veritabanında saklar[span_0](start_span)[span_0](end_span).</p>
                 <p><b>2. Hesap Güvenliği ve Cihaz Sınırı:</b> Platformumuzun adil kullanım ilkeleri gereği her kullanıcı yalnızca tek bir cihaz ve tek bir hesap üzerinden işlem yapabilir. Çoklu hesap veya hile tespit edilen hesaplar kalıcı olarak banlanır[span_1](start_span)[span_1](end_span).</p>
                 <p><b>3. Çerezler ve Yerel Depolama:</b> Oturum sürekliliğinizi sağlamak ve cihaz kimliğinizi doğrulamak amacıyla tarayıcı yerel depolama alanı (localStorage) kullanılmaktadır[span_2](start_span)[span_2](end_span).</p>
                 <p><b>4. Üçüncü Taraf Hizmetleri:</b> Uygulama içerisindeki kimlik doğrulama ve veri depolama altyapısı için Google Firebase altyapısı kullanılmakta olup, verileriniz üçüncü şahıslarla ticari amaçla paylaşılmaz[span_3](start_span)[span_3](end_span).</p>
@@ -162,7 +161,7 @@
     <div id="app-screen" class="hidden flex-col" style="flex:1;">
         <header>
             <div>
-                <h1 id="user-fullname-display" style="font-size: 16px; color: #58a6ff; font-weight: bold;">Ödül Merkezi</h1>
+                <h1 id="user-fullname-display" style="font-size: 16px; color: #58a6ff; font-weight: bold;">MobiLearn Ödül Merkezi</h1>
                 <p id="user-email-display" style="font-size: 11px; color: #8b949e;"></p>
             </div>
             <div style="display: flex; align-items: center; gap: 8px;">
@@ -175,7 +174,6 @@
         </header>
 
         <main>
-            <!-- Güvenlik ve Hile Uyarı Butonu (Açılır Modal Tetikleyici) -->
             <div style="margin-bottom: 16px; width: 100%;">
                 <button onclick="openSecurityModal()" style="width: 100%; background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-radius: 12px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; color: #f87171; font-weight: bold; font-size: 13px;">
                     <div style="display: flex; align-items: center; gap: 10px;">
@@ -186,7 +184,7 @@
                 </button>
             </div>
 
-            <!-- GÜVENLİK MODALI (AÇILIR PENCERE) -->
+            <!-- GÜVENLİK MODALI -->
             <div id="security-modal" class="hidden" style="position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 16px;">
                 <div style="background: #161b22; border: 1px solid #30363d; border-radius: 16px; padding: 20px; width: 100%; max-width: 400px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
@@ -196,7 +194,7 @@
                         <button onclick="closeSecurityModal()" style="background: none; border: none; color: #8b949e; font-size: 18px; cursor: pointer;"><i class="fas fa-times"></i></button>
                     </div>
                     <p style="font-size: 12px; color: #d1d5db; line-height: 1.5; margin-bottom: 20px;">
-                        Çift hesap açmak, farklı cihazlardan aynı hesaba girmek, makro/otomasyon kullanmak, hile girişimlerinde bulunmak veya yetkisiz puan yükseltmek kesinlikle yasaktır. Sistem güvenlik algoritmalarımız bu ihlalleri anında tespit eder; tespit edilen hesaplar ve ilişkili tüm varlıklar <b>kalıcı olarak banlanır</b>, biriken ödüller ve bakiyeler silinir[span_5](start_span)[span_5](end_span).
+                        Çift hesap açmak, farklı cihazlardan aynı hesaba girmek, makro/otomasyon kullanmak yasaktır. Tespit edilen hesaplar ve biriken puanlar <b>kalıcı olarak silinir</b>[span_5](start_span)[span_5](end_span).
                     </p>
                     <button onclick="closeSecurityModal()" class="btn-primary" style="background: #30363d; padding: 10px; font-size: 14px;">Anladım</button>
                 </div>
@@ -312,7 +310,7 @@
                     <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 6px; color: #34d399;"><i class="fas fa-calendar-check"></i> Günlük Giriş Bonusu</h2>
                     <p style="font-size: 13px; color: #8b949e; margin-bottom: 20px;">Her gün giriş yaparak günlük ödülünü almayı unutma!</p>
                     <div style="background: #21262d; border: 1px solid #30363d; padding: 16px; border-radius: 12px; margin-bottom: 20px;">
-                        <p id="daily-status-text" style="font-size: 15px; font-weight: bold; color: #fff; margin-bottom: 10px;">Bugünkü Ödülün: 100 Puan</p>
+                        <p id="daily-status-text" style="font-size: 15px; font-weight: bold; color: #fff; margin-bottom: 10px;">Bugünkü Ödülün: 150 Puan</p>
                         <button id="claim-daily-btn" onclick="claimDailyBonus()" class="btn-primary" style="background: #34d399; color: #0d1117;">Bugünkü Ödülü Al</button>
                     </div>
                 </div>
@@ -443,16 +441,14 @@
                     </div>
                 </div>
 
-                <!-- 2. BAŞARIMLAR VE ROZETLER EKRANI (Daha Çetin/Zorlaştırılmış) -->
+                <!-- Başarımlar ve Rozetler Ekranı -->
                 <div id="mod-achievements" class="module-view hidden module-view-box" style="text-align: left;">
                     <h2 style="font-size: 18px; margin-bottom: 6px; text-align: center; color: #38bdf8;"><i class="fas fa-medal"></i> Başarımlar & Rozetler</h2>
                     <p style="font-size: 13px; color: #8b949e; margin-bottom: 16px; text-align: center;">Zorlu hedefleri tamamla, büyük ödülleri kap!</p>
-                    <div id="achievements-list-container">
-                        <!-- Javascript ile doldurulacak -->
-                    </div>
+                    <div id="achievements-list-container"></div>
                 </div>
 
-                <!-- 3. ARKADAŞ DÜELLOSU EKRANI (Günlük 5 Hak & Rakip Simülasyonlu) -->
+                <!-- Arkadaş Düellosu Ekranı -->
                 <div id="mod-duel" class="module-view hidden module-view-box" style="text-align: center;">
                     <h2 style="font-size: 18px; margin-bottom: 6px; color: #f43f5e;"><i class="fas fa-user-friends"></i> Arkadaş Düellosu (1v1)</h2>
                     <p style="font-size: 13px; color: #8b949e; margin-bottom: 10px;">Rakiple karşılıklı 3 soru üzerinden yarış!</p>
@@ -472,17 +468,14 @@
                     </div>
                 </div>
 
-                <!-- HEDİYE DÜKKANI LİSTE EKRANI -->
+                <!-- Hediye Dükkanı Liste Ekranı -->
                 <div id="mod-shop" class="module-view hidden module-view-box" style="text-align: left;">
                     <h2 style="font-size: 18px; margin-bottom: 6px; text-align: center;">🎁 Hediye Dükkanı</h2>
                     <p style="font-size: 13px; color: #8b949e; margin-bottom: 16px; text-align: center;">Puanlarınla harika hediyeler kazan!</p>
-                    
-                    <div id="gift-list-container">
-                        <!-- Ürünler Javascript kısmındaki giftShopItems dizisinden otomatik yüklenir -->
-                    </div>
+                    <div id="gift-list-container"></div>
                 </div>
 
-                <!-- HEDİYE SATIN ALMA / ADRES FORMU EKRANI -->
+                <!-- Hediye Satın Alma / Adres Formu Ekranı -->
                 <div id="mod-shop-checkout" class="module-view hidden module-view-box" style="text-align: left;">
                     <button onclick="openModule('shop')" class="back-btn" style="margin-bottom: 10px;">
                         <i class="fas fa-arrow-left"></i> Dükkana Dön
@@ -505,7 +498,7 @@
                     <button onclick="completeGiftPurchase()" class="btn-primary" style="background: #ec4899;">Siparişi Tamamla ve Satın Al</button>
                 </div>
 
-                <!-- 4. NAKİT İLE VIP ÜYELİK EKRANI -->
+                <!-- Nakit ile VIP Üyelik Ekranı -->
                 <div id="mod-vip" class="module-view hidden module-view-box" style="text-align: center;">
                     <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 6px; color: #8b5cf6;"><i class="fas fa-crown"></i> VIP Üyelik (Nakit Ödeme)</h2>
                     <p style="font-size: 13px; color: #8b949e; margin-bottom: 16px;">Aşağıdaki IBAN adreslerimizden birine 50 TL göndererek VIP üye olun!</p>
@@ -528,7 +521,7 @@
                     <button onclick="requestVipPayment()" class="btn-primary" style="background: #8b5cf6;">Ödemeyi Bildir ve Onay Bekle</button>
                 </div>
 
-                <!-- 5. DİJİTAL CÜZDAN / SANAL KARTLAR VE E-PİN EKRANI (Genişletilmiş) -->
+                <!-- Dijital Cüzdan Ekranı -->
                 <div id="mod-digicard" class="module-view hidden module-view-box" style="text-align: left;">
                     <h2 style="font-size: 18px; margin-bottom: 6px; text-align: center; color: #10b981;"><i class="fas fa-credit-card"></i> Dijital Cüzdan & E-Pin</h2>
                     <p style="font-size: 13px; color: #8b949e; margin-bottom: 16px; text-align: center;">Bakiyenizle anında e-pin ve dijital kodlar satın alın!</p>
@@ -547,42 +540,10 @@
                             </div>
                             <button onclick="buyPin('Steam 50 TL', 250000)" class="btn-primary" style="background: #10b981; padding: 8px 12px; font-size: 12px; width: auto;">Satın Al</button>
                         </div>
-
-                        <div style="background: #21262d; border: 1px solid #30363d; padding: 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h4 style="font-size: 13px; font-weight: bold;">Papara / Ininal 50 TL</h4>
-                                <p style="font-size: 11px; color: #e3b341; font-weight: bold;">250.000 Puan</p>
-                            </div>
-                            <button onclick="buyPin('Papara 50 TL', 250000)" class="btn-primary" style="background: #10b981; padding: 8px 12px; font-size: 12px; width: auto;">Satın Al</button>
-                        </div>
-
-                        <div style="background: #21262d; border: 1px solid #30363d; padding: 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h4 style="font-size: 13px; font-weight: bold;">Google Play 25 TL Kodu</h4>
-                                <p style="font-size: 11px; color: #e3b341; font-weight: bold;">130.000 Puan</p>
-                            </div>
-                            <button onclick="buyPin('Google Play 25 TL', 130000)" class="btn-primary" style="background: #10b981; padding: 8px 12px; font-size: 12px; width: auto;">Satın Al</button>
-                        </div>
-
-                        <div style="background: #21262d; border: 1px solid #30363d; padding: 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h4 style="font-size: 13px; font-weight: bold;">App Store 25 TL Kodu</h4>
-                                <p style="font-size: 11px; color: #e3b341; font-weight: bold;">130.000 Puan</p>
-                            </div>
-                            <button onclick="buyPin('App Store 25 TL', 130000)" class="btn-primary" style="background: #10b981; padding: 8px 12px; font-size: 12px; width: auto;">Satın Al</button>
-                        </div>
-
-                        <div style="background: #21262d; border: 1px solid #30363d; padding: 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <h4 style="font-size: 13px; font-weight: bold;">Netflix 1 Aylık E-Pin</h4>
-                                <p style="font-size: 11px; color: #e3b341; font-weight: bold;">750.000 Puan</p>
-                            </div>
-                            <button onclick="buyPin('Netflix 1 Ay', 750000)" class="btn-primary" style="background: #10b981; padding: 8px 12px; font-size: 12px; width: auto;">Satın Al</button>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Puan Takas -->
+                <!-- Puan Takas Ekranı -->
                 <div id="mod-exchange" class="module-view hidden module-view-box" style="text-align: left;">
                     <h2 style="font-size: 18px; margin-bottom: 6px; text-align: center;">Puan Takas</h2>
                     <p style="font-size: 13px; color: #8b949e; margin-bottom: 16px; text-align: center;">Puanlarınızı cüzdan bakiyesine dönüştürün.</p>
@@ -593,15 +554,9 @@
                     <button onclick="convertPoints()" class="btn-primary" style="background: #9333ea;">Puanı Takas Et</button>
                 </div>
 
-                <!-- Para Çek -->
+                <!-- Para Çek Ekranı -->
                 <div id="mod-payout" class="module-view hidden module-view-box" style="text-align: left;">
                     <h2 style="font-size: 18px; margin-bottom: 6px; text-align: center;">Para Çekme Talebi</h2>
-                    
-                    <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid #f59e0b; padding: 12px; border-radius: 8px; margin-bottom: 14px;">
-                        <h4 style="color: #f59e0b; font-size: 13px; font-weight: bold; margin-bottom: 4px;"><i class="fas fa-exclamation-triangle"></i> Önemli Bilgilendirme</h4>
-                        <p style="font-size: 11px; color: #d1d5db; line-height: 1.4;">Sistem güvenliği ve işlem yoğunluğu nedeniyle minimum çekim tutarı 100 TL'dir. Ödemeler haftada bir gün toplu olarak kontrol edilip hesaplara aktarılmaktadır.</p>
-                    </div>
-
                     <p style="font-size: 13px; color: #8b949e; margin-bottom: 16px; text-align: center;">Bakiye: <span id="wallet-balance" style="color: #34d399; font-weight: bold;">0.00 TL</span></p>
                     
                     <div class="input-group">
@@ -663,6 +618,15 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getDatabase, ref, set, get, update, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // Service Worker Kaydı (PWA Desteği)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker Kayıt Başarılı:', reg.scope))
+                    .catch(err => console.log('Service Worker Kayıt Hatası:', err));
+            });
+        }
 
         const firebaseConfig = {
           apiKey: "AIzaSyAE5KGqX2jWg5zz1pi4Ozwei-l2hCxe76Y",
@@ -973,7 +937,7 @@
             document.getElementById('wallet-balance').innerText = (userData.balance || 0).toFixed(2) + " TL";
             document.getElementById('digi-card-balance').innerText = (userData.balance || 0).toFixed(2) + " TL";
             document.getElementById('my-ref-code').value = userData.refCode || "";
-            document.getElementById('user-fullname-display').innerText = userData.fullName || "Ödül Merkezi";
+            document.getElementById('user-fullname-display').innerText = userData.fullName || "MobiLearn Ödül Merkezi";
 
             let pts = userData.points || 0;
             let badgeEl = document.getElementById('badge-display');
