@@ -622,41 +622,23 @@
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getDatabase, ref, set, get, update, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        // Güvenli Adsgram Başlatma (SDK'nın tamamen yüklenmesini bekler)
-        let adController = null;
-        try {
-            if (window.Adsgram) {
-                adController = window.Adsgram.init({ blockId: "int-40487" });
-            }
-        } catch (e) {
-            console.log("Adsgram init hatası:", e);
-        }
-
+        // GÜVENLİ VE HATASIZ REKLAM TETİKLEYİCİSİ
         async function triggerAdsgramInterstitial() {
-            // Eğer sayfa yüklenirken Adsgram nesnesi oluşmadıysa tekrar tetiklemeyi dene
-            if (!adController && window.Adsgram) {
-                try {
-                    adController = window.Adsgram.init({ blockId: "int-40487" });
-                } catch(err) {
-                    console.log("Adsgram yeniden init hatası:", err);
-                }
-            }
-
-            if (adController) {
-                try {
+            try {
+                if (window.Adsgram) {
+                    const adController = window.Adsgram.init({ blockId: "int-40487", debug: true });
                     await adController.show();
                     return true;
-                } catch (e) {
-                    console.log("Reklam gösterilemedi veya kapatıldı:", e);
-                    return false;
+                } else {
+                    console.log("Adsgram SDK window içinde bulunamadı.");
                 }
-            } else {
-                console.log("Adsgram adController henüz hazır değil.");
+            } catch (e) {
+                console.log("Reklam yüklenemedi / test modunda olabilir:", e);
             }
             return false;
         }
 
-        // Her 5 tıklamada bir reklam tetikleme mekanizması
+        // Her 5 tıklamada bir reklam tetikleme mekanizması (Hakkı yemesini önleyen akıllı kontrol)
         let globalActionCounter = 0;
         async function checkAndTriggerAd() {
             globalActionCounter++;
