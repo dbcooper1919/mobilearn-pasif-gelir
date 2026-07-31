@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ödül ve Kazan Platformu</title>
+    <!-- Google AdSense Doğrulama ve Reklam Kodu -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6757295748613564"
+         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -146,11 +149,11 @@
                 <button onclick="closePrivacyModal()" style="background: none; border: none; color: #8b949e; font-size: 18px; cursor: pointer;"><i class="fas fa-times"></i></button>
             </div>
             <div style="font-size: 12px; color: #d1d5db; line-height: 1.6; display: flex; flex-direction: column; gap: 10px;">
-                <p><b>1. Veri Toplama ve Kullanım:</b> Ödül ve Kazan Platformu, hesap yönetimi, puan takibi, güvenlik doğrulaması ve ödül gönderimi amacıyla e-posta adresinizi, cihaz parmak izinizi ve uygulama içi işlem geçmişinizi güvenli Firebase veritabanında saklar[span_0](start_span)[span_0](end_span).</p>
-                <p><b>2. Hesap Güvenliği ve Cihaz Sınırı:</b> Platformumuzun adil kullanım ilkeleri gereği her kullanıcı yalnızca tek bir cihaz ve tek bir hesap üzerinden işlem yapabilir. Çoklu hesap veya hile tespit edilen hesaplar kalıcı olarak banlanır[span_1](start_span)[span_1](end_span).</p>
-                <p><b>3. Çerezler ve Yerel Depolama:</b> Oturum sürekliliğinizi sağlamak ve cihaz kimliğinizi doğrulamak amacıyla tarayıcı yerel depolama alanı (localStorage) kullanılmaktadır[span_2](start_span)[span_2](end_span).</p>
-                <p><b>4. Üçüncü Taraf Hizmetleri:</b> Uygulama içerisindeki kimlik doğrulama ve veri depolama altyapısı için Google Firebase altyapısı kullanılmakta olup, verileriniz üçüncü şahıslarla ticari amaçla paylaşılmaz[span_3](start_span)[span_3](end_span).</p>
-                <p><b>5. İletişim ve Destek:</b> Gizlilik politikamızla ilgili her türlü soru ve talebiniz için destek sistemimiz üzerinden bizimle iletişime geçebilirsiniz[span_4](start_span)[span_4](end_span).</p>
+                <p><b>1. Veri Toplama ve Kullanım:</b> Ödül ve Kazan Platformu, hesap yönetimi, puan takibi, güvenlik doğrulaması ve ödül gönderimi amacıyla e-posta adresinizi, cihaz parmak izinizi ve uygulama içi işlem geçmişinizi güvenli Firebase veritabanında saklar[span_1](start_span)[span_1](end_span).</p>
+                <p><b>2. Hesap Güvenliği ve Cihaz Sınırı:</b> Platformumuzun adil kullanım ilkeleri gereği her kullanıcı yalnızca tek bir cihaz ve tek bir hesap üzerinden işlem yapabilir. Çoklu hesap veya hile tespit edilen hesaplar kalıcı olarak banlanır[span_2](start_span)[span_2](end_span).</p>
+                <p><b>3. Çerezler ve Yerel Depolama:</b> Oturum sürekliliğinizi sağlamak ve cihaz kimliğinizi doğrulamak amacıyla tarayıcı yerel depolama alanı (localStorage) kullanılmaktadır[span_3](start_span)[span_3](end_span).</p>
+                <p><b>4. Üçüncü Taraf Hizmetleri:</b> Uygulama içerisindeki kimlik doğrulama ve veri depolama altyapısı için Google Firebase altyapısı kullanılmakta olup, verileriniz üçüncü şahıslarla ticari amaçla paylaşılmaz[span_4](start_span)[span_4](end_span).</p>
+                <p><b>5. İletişim ve Destek:</b> Gizlilik politikamızla ilgili her türlü soru ve talebiniz için destek sistemimiz üzerinden bizimle iletişime geçebilirsiniz[span_5](start_span)[span_5](end_span).</p>
             </div>
             <button onclick="closePrivacyModal()" class="btn-primary" style="margin-top: 16px; padding: 10px; font-size: 14px;">Okudum, Anladım</button>
         </div>
@@ -650,7 +653,7 @@
                 <!-- Ödeme Alanlar -->
                 <div id="mod-paidlist" class="module-view hidden module-view-box" style="text-align: left;">
                     <h2 style="font-size: 18px; margin-bottom: 16px; text-align: center;">🧾 Son Ödeme Alanlar</h2>
-                    <div id="payouts-list">Yükleniyor...*/</div>
+                    <div id="payouts-list">Yükleniyor...</div>
                 </div>
             </div>
         </main>
@@ -701,7 +704,6 @@
 
         let dailyQuizList = [];
 
-        // Tarayıcı/Cihaz Parmak İzi (Device Fingerprint) ve Çoklu Cihaz / Çift Hesap Engelleme Altyapısı
         function getOrCreateDeviceId() {
             let devId = localStorage.getItem('app_secure_device_id');
             if(!devId) {
@@ -824,7 +826,6 @@
                 }
             } catch (error) {
                 authError.innerText = error.message;
-                authError.classList.add('hidden'); // Fix toggle visibility
                 authError.classList.remove('hidden');
             }
         });
@@ -963,7 +964,7 @@
             let multiplier = userData.vip ? 2 : 1;
             let finalAmount = amount * multiplier;
             userData.points = (userData.points || 0) + finalAmount;
-            userData.xp = (userData.xp || 0) + amount; // XP birikimi
+            userData.xp = (userData.xp || 0) + amount;
             await update(ref(db, 'users/' + currentUser.uid), { points: userData.points, xp: userData.xp });
             updateUI();
         }
@@ -994,7 +995,7 @@
             let maxQuiz = userData.vip ? 20 : 10;
             let maxAds = userData.vip ? 60 : 30;
             let maxMystery = userData.vip ? 20 : 10;
-            let maxDuel = 5; // Günlük 5 Düello Hakkı
+            let maxDuel = 5;
 
             document.getElementById('wheel-left').innerText = `${maxWheel - (limits.wheel || 0)} / ${maxWheel}`;
             document.getElementById('click-left').innerText = maxClick - (limits.click || 0);
@@ -1012,8 +1013,7 @@
                 boxBtn.style.background = "#374151";
                 boxBtn.style.color = "#8b949e";
             } else {
-                boxBtn.innerText = "Süre Dolumu Bekleniyor" === boxBtn.innerText ? "Şans Kutusunu Aç (25 Puan)" : boxBtn.innerText;
-                // Keep default button styling handled seamlessly
+                boxBtn.innerText = "Şans Kutusunu Aç (25 Puan)";
                 boxBtn.disabled = false;
                 boxBtn.style.background = "#a855f7";
                 boxBtn.style.color = "#fff";
@@ -1061,7 +1061,6 @@
             }
         }
 
-        // Güvenlik ve Gizlilik Modalı Fonksiyonları
         window.openSecurityModal = function() {
             document.getElementById('security-modal').classList.remove('hidden');
         }
@@ -1093,7 +1092,6 @@
             document.getElementById('module-menu').classList.remove('hidden');
         }
 
-        // 2. BAŞARIMLAR MANTIĞI (Daha Çetin / Zorlaştırılmış Eşikler)
         function renderAchievements() {
             const container = document.getElementById('achievements-list-container');
             container.innerHTML = "";
@@ -1137,7 +1135,6 @@
             alert(`Tebrikler! Başarım açıldı ve ${reward} Puan kazandınız.`);
         }
 
-        // 3. ARKADAŞ DÜELLOSU MANTIĞI (Günlük 5 Hak ve Gerçekçi Simülasyonlu 3 Soruluk Yapı)
         let duelQuestionsPool = [
             { q: "Türkiye'nin başkenti neresidir?", options: ["Ankara", "İstanbul", "İzmir", "Bursa"], answer: 0 },
             { q: "2 + 2 * 2 işleminin sonucu kaçtır?", options: ["8", "6", "4", "2"], answer: 1 },
@@ -1168,7 +1165,6 @@
             await update(ref(db, 'users/' + currentUser.uid + '/limits'), limits);
             updateUI();
 
-            // Rastgele 3 soru seç
             let shuffled = [...duelQuestionsPool].sort(() => 0.5 - Math.random());
             currentDuel = { round: 1, myScore: 0, rivalScore: 0, questions: shuffled.slice(0, 3) };
 
@@ -1202,12 +1198,10 @@
         }
 
         function handleDuelAnswer(selectedIndex, correctIndex) {
-            // Kullanıcı cevabı
             if(selectedIndex === correctIndex) {
                 currentDuel.myScore++;
             }
 
-            // Rakip simülasyonu (%65 ihtimalle doğru bilir)
             let rivalCorrect = Math.random() < 0.65;
             if(rivalCorrect) {
                 currentDuel.rivalScore++;
@@ -1233,7 +1227,6 @@
             updateUI();
         }
 
-        // 4. NAKİT İLE VIP ÖDEME BİLDİRİMİ
         window.requestVipPayment = async function() {
             const bankName = document.getElementById('vip-bank-name').value.trim();
             const senderInfo = document.getElementById('vip-sender-info').value.trim();
@@ -1258,7 +1251,6 @@
             closeModule();
         }
 
-        // 5. DİJİTAL CÜZDAN E-PİN SATIN ALMA
         window.buyPin = async function(pinName, costPoints) {
             if((userData.points || 0) < costPoints) {
                 alert('Bu e-pin kodu için puanınız yetersiz!');
@@ -1646,7 +1638,6 @@
             document.getElementById('anladim-check').checked = false;
         }
 
-        // İsim soyismi gizleyerek şifreli hale getiren yardımcı fonksiyon (Örn: Kubilay Erdemir -> K*** E***)
         function maskFullName(fullName) {
             if(!fullName) return "Kullanıcı";
             return fullName.split(' ').map(part => {
@@ -1669,7 +1660,6 @@
                     let maskedName = maskFullName(u.fullName || u.email);
                     let vipTag = u.vip ? " 👑" : "";
                     
-                    // Giriş yapmış kullanıcının kendi sırasını yeşil yapma kontrolü
                     let isCurrent = currentUser && u.id === currentUser.uid;
                     let itemStyle = isCurrent ? "background: rgba(16, 185, 129, 0.15); border-color: #10b981;" : "";
                     let textStyle = isCurrent ? "color: #34d399; font-weight: bold;" : "";
