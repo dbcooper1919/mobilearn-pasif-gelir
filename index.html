@@ -22,16 +22,16 @@
         .gap-4 { gap: 16px; }
 
         #auth-screen { position: fixed; inset: 0; background: #0d1117; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 16px; overflow-y: auto; }
-        .auth-card { background: #161b22; border: 1px solid #30363d; padding: 24px; border-radius: 16px; width: 100%; max-width: 400px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); margin: auto; }
+        .auth-card { background: #161b22; border: 1px solid #30363d; padding: 24px; border-radius: 16px; width: 100%; max-width: 400px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); margin: auto; text-align: center; }
         
-        .input-group { margin-bottom: 16px; }
+        .input-group { margin-bottom: 16px; text-align: left; }
         .input-group label { display: block; font-size: 13px; color: #8b949e; margin-bottom: 6px; }
         .input-group input, .input-group select, .input-group textarea { width: 100%; background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 12px; color: #fff; font-size: 15px; outline: none; }
         .input-group input:focus, .input-group select:focus, .input-group textarea:focus { border-color: #1f6feb; }
         
         .btn-primary { width: 100%; background: #00b4d8; color: #fff; border: none; padding: 14px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 16px; transition: background 0.2s; box-shadow: 0 4px 12px rgba(0,180,216,0.3); }
         .btn-primary:hover { background: #0096b4; }
-        .btn-google { width: 100%; background: #ffffff; color: #111827; border: none; padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; }
+        .btn-google { width: 100%; background: #ffffff; color: #111827; border: none; padding: 14px; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px; box-shadow: 0 4px 12px rgba(255,255,255,0.1); }
         
         header { background: #161b22; border-bottom: 1px solid #30363d; padding: 16px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 40; }
         main { flex: 1; padding: 16px; max-width: 500px; width: 100%; margin: 0 auto; padding-bottom: 40px; }
@@ -95,45 +95,20 @@
 </head>
 <body>
 
-    <!-- GİRİŞ / KAYIT EKRANI -->
+    <!-- GİRİŞ EKRANI (Yalnızca Google ile Giriş) -->
     <div id="auth-screen">
         <div class="auth-card">
-            <h2 id="auth-title" style="text-align: center; font-size: 22px; margin-bottom: 20px; color: #58a6ff;">Giriş Yap</h2>
-            <div id="auth-error" class="hidden" style="background: rgba(239,68,68,0.1); border: 1px solid #ef4444; color: #f87171; padding: 10px; border-radius: 6px; margin-bottom: 14px; font-size: 13px;"></div>
+            <h2 style="font-size: 22px; margin-bottom: 10px; color: #58a6ff;">Ödül Merkezine Hoş Geldiniz</h2>
+            <p style="font-size: 13px; color: #8b949e; margin-bottom: 20px;">Devam etmek için lütfen Google hesabınızla giriş yapın.</p>
             
-            <form id="auth-form">
-                <!-- Kayıt Olurken Görünecek İsim Soyisim Alanı -->
-                <div class="input-group hidden" id="auth-name-group">
-                    <label>Ad Soyad</label>
-                    <input type="text" id="auth-fullname" placeholder="Adınız ve Soyadınız">
-                </div>
-                <div class="input-group">
-                    <label>E-posta Adresi</label>
-                    <input type="email" id="auth-email" required>
-                </div>
-                <div class="input-group">
-                    <label>Şifre</label>
-                    <input type="password" id="auth-password" required>
-                </div>
-                <!-- Kayıt Olurken Görünecek Referans Alanı -->
-                <div class="input-group hidden" id="auth-ref-group">
-                    <label>Referans Kodu (İsteğe Bağlı)</label>
-                    <input type="text" id="auth-ref-input" placeholder="Varsa arkadaşınızın kodu">
-                </div>
-                <button type="submit" id="auth-submit-btn" class="btn-primary">Giriş Yap</button>
-            </form>
+            <div id="auth-error" class="hidden" style="background: rgba(239,68,68,0.1); border: 1px solid #ef4444; color: #f87171; padding: 10px; border-radius: 6px; margin-bottom: 14px; font-size: 13px;"></div>
 
             <button id="google-login-btn" class="btn-google">
-                <i class="fab fa-google" style="color: #ea4335;"></i> Google ile Giriş Yap
+                <i class="fab fa-google" style="color: #ea4335; font-size: 18px;"></i> Google ile Devam Et
             </button>
 
-            <div style="margin-top: 20px; text-align: center; font-size: 13px; color: #8b949e;">
-                <span id="auth-toggle-text">Hesabınız yok mu?</span>
-                <button id="auth-toggle-btn" style="background: none; border: none; color: #58a6ff; font-weight: 600; cursor: pointer; margin-left: 4px;">Kayıt Ol</button>
-            </div>
-
-            <!-- Google Play / Arayüz Uyumlu Gizlilik Sözleşmesi Bağlantısı -->
-            <div style="margin-top: 15px; text-align: center;">
+            <!-- Gizlilik Sözleşmesi Bağlantısı -->
+            <div style="margin-top: 20px; text-align: center;">
                 <button type="button" onclick="openPrivacyModal()" style="background: none; border: none; color: #8b949e; font-size: 11px; cursor: pointer; text-decoration: underline;">Gizlilik Sözleşmesi ve Şartlar</button>
             </div>
         </div>
@@ -148,12 +123,12 @@
                 </h3>
                 <button onclick="closePrivacyModal()" style="background: none; border: none; color: #8b949e; font-size: 18px; cursor: pointer;"><i class="fas fa-times"></i></button>
             </div>
-            <div style="font-size: 12px; color: #d1d5db; line-height: 1.6; display: flex; flex-direction: column; gap: 10px;">
-                <p><b>1. Veri Toplama ve Kullanım:</b> Ödül ve Kazan Platformu, hesap yönetimi, puan takibi, güvenlik doğrulaması ve ödül gönderimi amacıyla e-posta adresinizi, cihaz parmak izinizi ve uygulama içi işlem geçmişinizi güvenli Firebase veritabanında saklar[span_1](start_span)[span_1](end_span).</p>
-                <p><b>2. Hesap Güvenliği ve Cihaz Sınırı:</b> Platformumuzun adil kullanım ilkeleri gereği her kullanıcı yalnızca tek bir cihaz ve tek bir hesap üzerinden işlem yapabilir. Çoklu hesap veya hile tespit edilen hesaplar kalıcı olarak banlanır[span_2](start_span)[span_2](end_span).</p>
-                <p><b>3. Çerezler ve Yerel Depolama:</b> Oturum sürekliliğinizi sağlamak ve cihaz kimliğinizi doğrulamak amacıyla tarayıcı yerel depolama alanı (localStorage) kullanılmaktadır[span_3](start_span)[span_3](end_span).</p>
-                <p><b>4. Üçüncü Taraf Hizmetleri:</b> Uygulama içerisindeki kimlik doğrulama ve veri depolama altyapısı için Google Firebase altyapısı kullanılmakta olup, verileriniz üçüncü şahıslarla ticari amaçla paylaşılmaz[span_4](start_span)[span_4](end_span).</p>
-                <p><b>5. İletişim ve Destek:</b> Gizlilik politikamızla ilgili her türlü soru ve talebiniz için destek sistemimiz üzerinden bizimle iletişime geçebilirsiniz[span_5](start_span)[span_5](end_span).</p>
+            <div style="font-size: 12px; color: #d1d5db; line-height: 1.6; display: flex; flex-direction: column; gap: 10px; text-align: left;">
+                <p><b>1. Veri Toplama ve Kullanım:</b> Ödül ve Kazan Platformu, hesap yönetimi, puan takibi, güvenlik doğrulaması ve ödül gönderimi amacıyla Google e-posta adresinizi, cihaz parmak izinizi ve uygulama içi işlem geçmişinizi güvenli Firebase veritabanında saklar[span_0](start_span)[span_0](end_span).</p>
+                <p><b>2. Hesap Güvenliği ve Cihaz Sınırı:</b> Platformumuzun adil kullanım ilkeleri gereği her kullanıcı yalnızca tek bir cihaz ve tek bir Google hesabı üzerinden işlem yapabilir. Çoklu hesap veya hile tespit edilen hesaplar kalıcı olarak banlanır[span_1](start_span)[span_1](end_span).</p>
+                <p><b>3. Çerezler ve Yerel Depolama:</b> Oturum sürekliliğinizi sağlamak ve cihaz kimliğinizi doğrulamak amacıyla tarayıcı yerel depolama alanı (localStorage) kullanılmaktadır[span_2](start_span)[span_2](end_span).</p>
+                <p><b>4. Üçüncü Taraf Hizmetleri:</b> Uygulama içerisindeki kimlik doğrulama ve veri depolama altyapısı için Google Firebase altyapısı kullanılmakta olup, verileriniz üçüncü şahıslarla ticari amaçla paylaşılmaz[span_3](start_span)[span_3](end_span).</p>
+                <p><b>5. İletişim ve Destek:</b> Gizlilik politikamızla ilgili her türlü soru ve talebiniz için destek sistemimiz üzerinden bizimle iletişime geçebilirsiniz[span_4](start_span)[span_4](end_span).</p>
             </div>
             <button onclick="closePrivacyModal()" class="btn-primary" style="margin-top: 16px; padding: 10px; font-size: 14px;">Okudum, Anladım</button>
         </div>
@@ -196,7 +171,7 @@
                         </h3>
                         <button onclick="closeSecurityModal()" style="background: none; border: none; color: #8b949e; font-size: 18px; cursor: pointer;"><i class="fas fa-times"></i></button>
                     </div>
-                    <p style="font-size: 12px; color: #d1d5db; line-height: 1.5; margin-bottom: 20px;">
+                    <p style="font-size: 12px; color: #d1d5db; line-height: 1.5; margin-bottom: 20px; text-align: left;">
                         Çift hesap açmak, farklı cihazlardan aynı hesaba girmek, makro/otomasyon kullanmak, hile girişimlerinde bulunmak veya yetkisiz puan yükseltmek kesinlikle yasaktır. Sistem güvenlik algoritmalarımız bu ihlalleri anında tespit eder; tespit edilen hesaplar ve ilişkili tüm varlıklar <b>kalıcı olarak banlanır</b>, biriken ödüller ve bakiyeler silinir.
                     </p>
                     <button onclick="closeSecurityModal()" class="btn-primary" style="background: #30363d; padding: 10px; font-size: 14px;">Anladım</button>
@@ -444,16 +419,14 @@
                     </div>
                 </div>
 
-                <!-- 2. BAŞARIMLAR VE ROZETLER EKRANI (Daha Çetin/Zorlaştırılmış) -->
+                <!-- 2. BAŞARIMLAR VE ROZETLER EKRANI -->
                 <div id="mod-achievements" class="module-view hidden module-view-box" style="text-align: left;">
                     <h2 style="font-size: 18px; margin-bottom: 6px; text-align: center; color: #38bdf8;"><i class="fas fa-medal"></i> Başarımlar & Rozetler</h2>
                     <p style="font-size: 13px; color: #8b949e; margin-bottom: 16px; text-align: center;">Zorlu hedefleri tamamla, büyük ödülleri kap!</p>
-                    <div id="achievements-list-container">
-                        <!-- Javascript ile doldurulacak -->
-                    </div>
+                    <div id="achievements-list-container"></div>
                 </div>
 
-                <!-- 3. ARKADAŞ DÜELLOSU EKRANI (Günlük 5 Hak & Rakip Simülasyonlu) -->
+                <!-- 3. ARKADAŞ DÜELLOSU EKRANI -->
                 <div id="mod-duel" class="module-view hidden module-view-box" style="text-align: center;">
                     <h2 style="font-size: 18px; margin-bottom: 6px; color: #f43f5e;"><i class="fas fa-user-friends"></i> Arkadaş Düellosu (1v1)</h2>
                     <p style="font-size: 13px; color: #8b949e; margin-bottom: 10px;">Rakiple karşılıklı 3 soru üzerinden yarış!</p>
@@ -478,9 +451,7 @@
                     <h2 style="font-size: 18px; margin-bottom: 6px; text-align: center;">🎁 Hediye Dükkanı</h2>
                     <p style="font-size: 13px; color: #8b949e; margin-bottom: 16px; text-align: center;">Puanlarınla harika hediyeler kazan!</p>
                     
-                    <div id="gift-list-container">
-                        <!-- Ürünler Javascript kısmındaki giftShopItems dizisinden otomatik yüklenir -->
-                    </div>
+                    <div id="gift-list-container"></div>
                 </div>
 
                 <!-- HEDİYE SATIN ALMA / ADRES FORMU EKRANI -->
@@ -529,7 +500,7 @@
                     <button onclick="requestVipPayment()" class="btn-primary" style="background: #8b5cf6;">Ödemeyi Bildir ve Onay Bekle</button>
                 </div>
 
-                <!-- 5. DİJİTAL CÜZDAN / SANAL KARTLAR VE E-PİN EKRANI (Genişletilmiş) -->
+                <!-- 5. DİJİTAL CÜZDAN / SANAL KARTLAR VE E-PİN EKRANI -->
                 <div id="mod-digicard" class="module-view hidden module-view-box" style="text-align: left;">
                     <h2 style="font-size: 18px; margin-bottom: 6px; text-align: center; color: #10b981;"><i class="fas fa-credit-card"></i> Dijital Cüzdan & E-Pin</h2>
                     <p style="font-size: 13px; color: #8b949e; margin-bottom: 16px; text-align: center;">Bakiyenizle anında e-pin ve dijital kodlar satın alın!</p>
@@ -662,7 +633,7 @@
     <!-- Firebase Scriptleri ve Mantık -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getAuth, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getDatabase, ref, set, get, update, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         const firebaseConfig = {
@@ -713,165 +684,66 @@
             return devId;
         }
 
-        let isLoginMode = true;
-        const authForm = document.getElementById('auth-form');
-        const authTitle = document.getElementById('auth-title');
-        const authSubmitBtn = document.getElementById('auth-submit-btn');
-        const authToggleBtn = document.getElementById('auth-toggle-btn');
-        const authToggleText = document.getElementById('auth-toggle-text');
         const authError = document.getElementById('auth-error');
-        const authRefGroup = document.getElementById('auth-ref-group');
-        const authNameGroup = document.getElementById('auth-name-group');
 
-        authToggleBtn.addEventListener('click', () => {
-            isLoginMode = !isLoginMode;
-            authTitle.innerText = isLoginMode ? "Giriş Yap" : "Kayıt Ol";
-            authSubmitBtn.innerText = isLoginMode ? "Giriş Yap" : "Kayıt Ol";
-            authToggleText.innerText = isLoginMode ? "Hesabınız yok mu?" : "Zaten hesabınız var mı?";
-            authToggleBtn.innerText = isLoginMode ? "Kayıt Ol" : "Giriş Yap";
-            
-            if(isLoginMode) {
-                authRefGroup.classList.add('hidden');
-                authNameGroup.classList.add('hidden');
-                document.getElementById('auth-fullname').required = false;
-            } else {
-                authRefGroup.classList.remove('hidden');
-                authNameGroup.classList.remove('hidden');
-                document.getElementById('auth-fullname').required = true;
-            }
-            authError.classList.add('hidden');
-        });
-
-        authForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('auth-email').value;
-            const password = document.getElementById('auth-password').value;
-            const fullName = document.getElementById('auth-fullname').value.trim();
-            authError.classList.add('hidden');
-            const currentDevId = getOrCreateDeviceId();
-
-            try {
-                if (isLoginMode) {
-                    const cred = await signInWithEmailAndPassword(auth, email, password);
-                    const userRef = ref(db, 'users/' + cred.user.uid);
-                    const snap = await get(userRef);
-                    if(snap.exists()) {
-                        let uVal = snap.val();
-                        if(uVal.banned) {
-                            await signOut(auth);
-                            throw new Error("Bu hesap hile veya güvenlik ihlali nedeniyle kalıcı olarak banlanmıştır!");
-                        }
-                        if(uVal.deviceId && uVal.deviceId !== currentDevId) {
-                            await signOut(auth);
-                            throw new Error("Güvenlik Uyarısı: Bu hesap başka bir cihaza kayıtlıdır! Farklı cihazlardan giriş yapmak yasaktır.");
-                        } else if(!uVal.deviceId) {
-                            await update(userRef, { deviceId: currentDevId });
-                        }
-                    }
-                } else {
-                    if(!fullName) {
-                        throw new Error("Lütfen ad ve soyadınızı giriniz!");
-                    }
-                    const refCodeInput = document.getElementById('auth-ref-input').value.trim();
-                    const allUsersSnap = await get(ref(db, 'users'));
-                    if(allUsersSnap.exists()) {
-                        let deviceAlreadyRegistered = false;
-                        allUsersSnap.forEach(child => {
-                            if(child.val().deviceId === currentDevId) {
-                                deviceAlreadyRegistered = true;
-                            }
-                        });
-                        if(deviceAlreadyRegistered) {
-                            throw new Error("Güvenlik Kuralı: Bu cihazdan daha önce başka bir hesap açılmıştır. Birden fazla hesap açmak yasaktır!");
-                        }
-                    }
-
-                    const cred = await createUserWithEmailAndPassword(auth, email, password);
-                    const refCode = "REF" + Math.floor(100000 + Math.random() * 900000);
-                    
-                    let initialData = { 
-                        email: cred.user.email, 
-                        fullName: fullName,
-                        points: 0, 
-                        balance: 0, 
-                        refCode, 
-                        vip: false, 
-                        completedTasks: {}, 
-                        wordHuntClaimed: false, 
-                        lastResetPeriod: getCurrentResetPeriodKey(), 
-                        lastDailyClaim: "",
-                        deviceId: currentDevId,
-                        banned: false,
-                        achievements: {},
-                        xp: 0
-                    };
-
-                    if(refCodeInput) {
-                        const snap = await get(ref(db, 'users'));
-                        if(snap.exists()) {
-                            let found = false;
-                            snap.forEach(child => {
-                                if(child.val().refCode === refCodeInput) {
-                                    found = true;
-                                }
-                            });
-                            if(found) {
-                                initialData.usedReferral = true;
-                                initialData.points = 50; 
-                            }
-                        }
-                    }
-
-                    await set(ref(db, 'users/' + cred.user.uid), initialData);
-                }
-            } catch (error) {
-                authError.innerText = error.message;
-                authError.classList.remove('hidden');
-            }
-        });
-
+        // Sadece Google ile Giriş ve Cihaz/E-posta Sınırı Kontrolü
         document.getElementById('google-login-btn').addEventListener('click', async () => {
             const provider = new GoogleAuthProvider();
             const currentDevId = getOrCreateDeviceId();
+            authError.classList.add('hidden');
+
             try {
                 const cred = await signInWithPopup(auth, provider);
+                const userEmail = cred.user.email;
                 const userRef = ref(db, 'users/' + cred.user.uid);
                 const snap = await get(userRef);
                 
+                // 1. Aynı telefondan/cihazdan daha önce başka bir hesap açılmış mı kontrolü
+                const allUsersSnap = await get(ref(db, 'users'));
+                let deviceAlreadyRegistered = false;
+                let emailAlreadyRegisteredOnAnotherDevice = false;
+
+                if(allUsersSnap.exists()) {
+                    allUsersSnap.forEach(child => {
+                        let val = child.val();
+                        // Farklı bir UID fakat aynı cihaz ID'si varsa
+                        if(child.key !== cred.user.uid && val.deviceId === currentDevId) {
+                            deviceAlreadyRegistered = true;
+                        }
+                        // Aynı e-posta adresi başka bir cihazda kayıtlı mı kontrolü
+                        if(child.key !== cred.user.uid && val.email === userEmail) {
+                            emailAlreadyRegisteredOnAnotherDevice = true;
+                        }
+                    });
+                }
+
+                if(deviceAlreadyRegistered) {
+                    await signOut(auth);
+                    throw new Error("Güvenlik Kuralı: Bu telefondan/cihazdan daha önce farklı bir hesap açılmıştır. Tek cihazda tek hesaba izin verilmektedir!");
+                }
+
+                if(emailAlreadyRegisteredOnAnotherDevice) {
+                    await signOut(auth);
+                    throw new Error("Güvenlik Kuralı: Bu e-posta adresi başka bir cihazda kayıtlıdır!");
+                }
+
                 if (snap.exists()) {
                     let uVal = snap.val();
                     if(uVal.banned) {
                         await signOut(auth);
-                        alert("Bu hesap hile veya güvenlik ihlali nedeniyle kalıcı olarak banlanmıştır!");
-                        return;
+                        throw new Error("Bu hesap hile veya güvenlik ihlali nedeniyle kalıcı olarak banlanmıştır!");
                     }
                     if(uVal.deviceId && uVal.deviceId !== currentDevId) {
                         await signOut(auth);
-                        alert("Güvenlik Uyarısı: Bu hesap başka bir cihaza kayıtlıdır!");
-                        return;
+                        throw new Error("Güvenlik Uyarısı: Bu hesap başka bir cihaza kayıtlıdır!");
                     } else if(!uVal.deviceId) {
                         await update(userRef, { deviceId: currentDevId });
                     }
                 } else {
-                    const allUsersSnap = await get(ref(db, 'users'));
-                    if(allUsersSnap.exists()) {
-                        let deviceAlreadyRegistered = false;
-                        allUsersSnap.forEach(child => {
-                            if(child.val().deviceId === currentDevId) {
-                                deviceAlreadyRegistered = true;
-                            }
-                        });
-                        if(deviceAlreadyRegistered) {
-                            await signOut(auth);
-                            alert("Güvenlik Kuralı: Bu cihazdan daha önce başka bir hesap açılmıştır!");
-                            return;
-                        }
-                    }
-
                     let googleName = cred.user.displayName || "Google Kullanıcısı";
                     const refCode = "REF" + Math.floor(100000 + Math.random() * 900000);
                     await set(userRef, { 
-                        email: cred.user.email, 
+                        email: userEmail, 
                         fullName: googleName,
                         points: 0, 
                         balance: 0, 
@@ -940,7 +812,7 @@
                     await update(userRef, { refCode: userData.refCode });
                 }
                 if(!userData.fullName) {
-                    userData.fullName = currentUser.email.split('@')[0];
+                    userData.fullName = currentUser.displayName || currentUser.email.split('@')[0];
                     await update(userRef, { fullName: userData.fullName });
                 }
 
@@ -1022,7 +894,7 @@
             const claimBtn = document.getElementById('claim-daily-btn');
             const dailyStatus = document.getElementById('daily-status-text');
             if(userData.lastDailyClaim === "CLAIMED") {
-                dailyStatus.innerText = "Bugünkü ödülünüz aldınız. Sonraki sıfırlamada tekrar alabilirsiniz!";
+                dailyStatus.innerText = "Bugünkü ödülünüzü aldınız. Sonraki sıfırlamada tekrar alabilirsiniz!";
                 claimBtn.innerText = "Alındı";
                 claimBtn.disabled = true;
                 claimBtn.style.background = "#374151";
