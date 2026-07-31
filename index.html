@@ -622,10 +622,26 @@
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getDatabase, ref, set, get, update, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        // Adsgram Entegrasyonu (Block ID: int-40487)
-        const adController = window.Adsgram ? window.Adsgram.init({ blockId: "int-40487" }) : null;
+        // Güvenli Adsgram Başlatma (SDK'nın tamamen yüklenmesini bekler)
+        let adController = null;
+        try {
+            if (window.Adsgram) {
+                adController = window.Adsgram.init({ blockId: "int-40487" });
+            }
+        } catch (e) {
+            console.log("Adsgram init hatası:", e);
+        }
 
         async function triggerAdsgramInterstitial() {
+            // Eğer sayfa yüklenirken Adsgram nesnesi oluşmadıysa tekrar tetiklemeyi dene
+            if (!adController && window.Adsgram) {
+                try {
+                    adController = window.Adsgram.init({ blockId: "int-40487" });
+                } catch(err) {
+                    console.log("Adsgram yeniden init hatası:", err);
+                }
+            }
+
             if (adController) {
                 try {
                     await adController.show();
@@ -634,6 +650,8 @@
                     console.log("Reklam gösterilemedi veya kapatıldı:", e);
                     return false;
                 }
+            } else {
+                console.log("Adsgram adController henüz hazır değil.");
             }
             return false;
         }
@@ -1005,7 +1023,7 @@
                 boxBtn.style.background = "#374151";
                 boxBtn.style.color = "#8b949e";
             } else {
-                boxBtn.innerText = "Şans Kutusunu Aç (25 Puan)";
+                boxBtn.innerText = "Süre Dolumu Bekleniyor" === boxBtn.innerText ? "Şans Kutusunu Aç (25 Puan)" : boxBtn.innerText;
                 boxBtn.disabled = false;
                 boxBtn.style.background = "#a855f7";
                 boxBtn.style.color = "#fff";
